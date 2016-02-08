@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author Fhersso
+ * Facade
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
