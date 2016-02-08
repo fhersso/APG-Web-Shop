@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+        
+    <navigation-rule>
+        <from-view-id>/home.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{homePageManager.logIn}</if>
+            <to-view-id>/homePage.xhtml</to-view-id>  
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/homePage.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{!homePageManager.logIn}</if>
+            <to-view-id>/home.xhtml</to-view-id>  
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/home.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{administratorPageManager.logIn}</if>
+            <to-view-id>/administratorPage.xhtml</to-view-id>  
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/administratorPage.xhtml</from-view-id>
+        <navigation-case>
+            <if>#{!administratorPageManager.logIn}</if>
+            <to-view-id>/home.xhtml</to-view-id>  
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>
+

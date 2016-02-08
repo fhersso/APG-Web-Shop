@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Web shop</title>
+    </h:head>
+    <h:body>
+        <h1> Welcome to our web shop <h:outputText value="#{homePageManager.userName}" /> </h1>
+        <h:dataTable id="table1" value="#{homePageManager.gnomes}" var="gnome"
+                     border="1">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gnome Type" />
+                </f:facet>
+                <h:outputText value="#{gnome.type}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price" />
+                </f:facet>
+                <h:outputText value="#{gnome.price}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Amount" />
+                </f:facet>
+                <h:outputText value="#{gnome.amount}" />
+            </h:column>
+            <hr/>
+        </h:dataTable>
+
+        <h:form>
+            <h3>Add Gnome to Cart</h3>
+            <p>
+                <h:outputLabel for="type" value="Gnome type: "/>
+                <h:inputText id="type" value="#{homePageManager.currentType}"/>
+                <h:outputLabel for="quantity" value="Quantity: "/>
+                <h:inputText id="quantity" value="#{homePageManager.currentQuantity}"/>
+                <h:commandButton value="Add to cart" action="#{homePageManager.addToCart}"/>
+            </p>
+            <hr/>
+        </h:form>
+        <h:form>
+            <h3>Your Cart</h3>
+            <p>
+                <c:forEach items="#{homePageManager.cart}" var="entry">
+                    <li>Gnome Type: #{entry.key}, Quantity: #{entry.value}</li>
+                </c:forEach>
+            </p>
+            <p> Total:  <h:outputText value="#{homePageManager.currentTotal}" /> eur </p>
+
+            <p>
+                <h:outputText value="#{homePageManager.error}" rendered="#{homePageManager.error != null}" style="color:red"/>
+            </p>
+            <h:commandButton value="Empty cart" action="#{homePageManager.emptyCart}"/>
+            <h:commandButton value="Pay" action="#{homePageManager.pay}"/>
+        </h:form>
+
+        <h:form>
+            <p> </p>
+            <h:commandButton value="Logout" action="#{homePageManager.logOut}"/>
+        </h:form>
+    </h:body>
+</html>
+
